@@ -6,7 +6,7 @@ import AddPerson from "./components/forms/AddPerson";
 import AddCar from "./components/forms/AddCar";
 import People from "./components/lists/People";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import PersonPage from "./components/listItems/PersonPage";
+import ShowPage from "./components/listItems/ShowPage";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -30,7 +30,7 @@ const App = () => {
                 </>
               }
             />
-            <Route path="/person/:id" element={<PersonPage />} />
+            <Route path="/people/:id" element={<ShowPage />} />
           </Routes>
         </Router>
       </div>

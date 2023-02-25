@@ -4,7 +4,7 @@ import { GET_PEOPLE } from "../../queries";
 import PersonCard from "./PersonCard";
 import { Link } from "react-router-dom";
 
-const ShowPage = () => {
+const PersonPage = () => {
   const { id } = useParams();
 
   const { loading, error, data } = useQuery(GET_PEOPLE, {
@@ -36,4 +36,4 @@ const ShowPage = () => {
   );
 };
 
-export default ShowPage;
+export default PersonPage;

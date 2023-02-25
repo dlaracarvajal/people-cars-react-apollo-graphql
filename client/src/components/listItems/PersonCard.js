@@ -7,7 +7,6 @@ import Cars from "../lists/Cars";
 import { Link, useLocation } from "react-router-dom";
 
 const PersonCard = (props) => {
-  const [id] = useState(props.id);
   const [firstName, setFirstName] = useState(props.firstName);
   const [lastName, setLastName] = useState(props.lastName);
   const [editMode, setEditMode] = useState(false);
@@ -44,16 +43,16 @@ const PersonCard = (props) => {
         <Card
           actions={[
             <EditOutlined key="edit" onClick={handleButtonClick} />,
-            <RemovePerson id={id} />,
+            <RemovePerson id={props.id} />,
           ]}
         >
           {firstName} {lastName}
           {props.children}
-          <Cars personId={id} />
+          <Cars personId={props.id} />
           {location.pathname === "/" ? (
-            <Link to={`/person/${id}`}>Learn More</Link>
+            <Link to={`/people/${props.id}`}>Learn More</Link>
           ) : (
-            <Link to={`/`}>Go Back</Link>
+            <Link to={`/`}>Go Back Home</Link>
           )}
         </Card>
       )}

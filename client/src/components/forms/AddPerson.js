@@ -51,8 +51,7 @@ const AddPerson = () => {
           display: "flex",
           justifyContent: "center",
           gap: "0.75rem",
-        }}
-      >
+        }}      >
         <Form.Item
           name="firstName"
           label="First Name"
