@@ -1,3 +1,4 @@
+import React from "react";
 import { useQuery } from "@apollo/client";
 import { Divider, List } from "antd";
 import { GET_PEOPLE } from "../../queries";
@@ -11,19 +12,23 @@ const People = () => {
 
   return (
     <>
-      <Divider>Records</Divider>
-      <List grid={{ gutter: 20, column: 1 }}>
-        {data.people.map(({ id, firstName, lastName }) => (
-          <List.Item key={id}>
-            <PersonCard
-              key={id}
-              id={id}
-              firstName={firstName}
-              lastName={lastName}
-            />
-          </List.Item>
-        ))}
-      </List>
+      {data.people.length > 0 && (
+          <List grid={{ gutter: 20, column: 1 }}>
+            {data.people.map(({ id, firstName, lastName }) => (
+              <React.Fragment key={id}>
+                <Divider>Records</Divider>
+                <List.Item key={id}>
+                  <PersonCard
+                    key={id}
+                    id={id}
+                    firstName={firstName}
+                    lastName={lastName}
+                  />
+                </List.Item>
+              </React.Fragment>
+            ))}
+          </List>
+        )}
     </>
   );
 };

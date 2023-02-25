@@ -5,7 +5,6 @@ import { useMutation, useQuery } from "@apollo/client";
 import { ADD_CAR, GET_CARS, GET_PEOPLE } from "../../queries";
 
 const AddPerson = () => {
-
   const [id] = useState(uuidv4());
   const [addCar] = useMutation(ADD_CAR);
 
@@ -48,87 +47,89 @@ const AddPerson = () => {
   }
 
   return (
-    <>
-      <Divider>Add Car</Divider>
+    <div>
       {data && data.people.length > 0 && (
-        <Form
-          name="add-car-form"
-          form={form}
-          layout="inline"
-          onFinish={onFinish}
-          size="large"
-          style={{
-            marginBottom: "40px",
-            display: "flex",
-            justifyContent: "center",
-            gap: "0.75rem",
-          }}
-        >
-          <Form.Item
-            name="year"
-            label="Year"
-            rules={[{ required: true, message: "Please input year!" }]}
+        <>
+          <Divider>Add Car</Divider>
+          <Form
+            name="add-car-form"
+            form={form}
+            layout="inline"
+            onFinish={onFinish}
+            size="large"
+            style={{
+              marginBottom: "40px",
+              display: "flex",
+              justifyContent: "center",
+              gap: "0.75rem",
+            }}
           >
-            <Input placeholder="Year" />
-          </Form.Item>
+            <Form.Item
+              name="year"
+              label="Year"
+              rules={[{ required: true, message: "Please input year!" }]}
+            >
+              <Input placeholder="Year" />
+            </Form.Item>
 
-          <Form.Item
-            name="make"
-            label="Make"
-            rules={[{ required: true, message: "Please input make!" }]}
-          >
-            <Input placeholder="Make" />
-          </Form.Item>
+            <Form.Item
+              name="make"
+              label="Make"
+              rules={[{ required: true, message: "Please input make!" }]}
+            >
+              <Input placeholder="Make" />
+            </Form.Item>
 
-          <Form.Item
-            name="model"
-            label="Model"
-            rules={[{ required: true, message: "Please input model!" }]}
-          >
-            <Input placeholder="Model" />
-          </Form.Item>
+            <Form.Item
+              name="model"
+              label="Model"
+              rules={[{ required: true, message: "Please input model!" }]}
+            >
+              <Input placeholder="Model" />
+            </Form.Item>
 
-          <Form.Item
-            name="price"
-            label="Price"
-            rules={[{ required: true, message: "Please input price!" }]}
-          >
-            <Input placeholder="Price" />
-          </Form.Item>
+            <Form.Item
+              name="price"
+              label="Price"
+              rules={[{ required: true, message: "Please input price!" }]}
+            >
+              <Input placeholder="Price" />
+            </Form.Item>
 
-          <Form.Item
-            name="personId"
-            label="Person"
-            rules={[{ required: true, message: "Please select a person!" }]}
-          >
-            <Select placeholder="Select a person" loading={loading}>
-              {data &&
-                data.people.map((person) => (
-                  <Select.Option key={person.id} value={person.id}>
-                    {person.firstName} {person.lastName}
-                  </Select.Option>
-                ))}
-            </Select>
-          </Form.Item>
+            <Form.Item
+              name="personId"
+              label="Person"
+              rules={[{ required: true, message: "Please select a person!" }]}
+            >
+              <Select placeholder="Select a person" loading={loading}>
+                {data &&
+                  data.people.map((person) => (
+                    <Select.Option key={person.id} value={person.id}>
+                      {person.firstName} {person.lastName}
+                    </Select.Option>
+                  ))}
+              </Select>
+            </Form.Item>
 
-          <Form.Item shouldUpdate={true}>
-            {() => (
-              <Button
-                type="primary"
-                htmlType="submit"
-                disabled={
-                  !form.isFieldsTouched(true) ||
-                  form.getFieldsError().filter(({ errors }) => errors.length)
-                    .length
-                }
-              >
-                Add Car
-              </Button>
-            )}
-          </Form.Item>
-        </Form>
+            <Form.Item shouldUpdate={true}>
+              {() => (
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  disabled={
+                    !form.isFieldsTouched(true) ||
+                    form.getFieldsError().filter(({ errors }) => errors.length)
+                      .length
+                  }
+                >
+                  Add Car
+                </Button>
+              )}
+            </Form.Item>
+          </Form>
+        </>
       )}
-    </>
+    </div>
   );
 };
 

@@ -68,12 +68,12 @@ const UpdateCar = (props) => {
         model: model,
         price: price,
       }}
-      style={{
-        marginBottom: "40px",
-        display: "flex",
-        justifyContent: "center",
-        gap: "0.75rem",
-      }}
+              style={{
+          marginBottom: "40px",
+          display: "flex",
+          justifyContent: "center",
+          gap: "0.75rem",
+        }}
     >
       <Form.Item
         name="year"
