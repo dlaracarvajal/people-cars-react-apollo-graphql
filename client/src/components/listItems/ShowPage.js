@@ -1,39 +1,56 @@
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
-import { GET_PEOPLE } from "../../queries";
-import PersonCard from "./PersonCard";
 import { Link } from "react-router-dom";
+import { GET_PERSON_WITH_CARS } from "../../queries";
+import { Card, Divider } from "antd";
+import CurrencyFormat from "react-currency-format";
 
-const PersonPage = () => {
+const ShowPage = () => {
   const { id } = useParams();
+  console.log(id);
 
-  const { loading, error, data } = useQuery(GET_PEOPLE, {
-    variables: { id },
+  const { loading, error, data } = useQuery(GET_PERSON_WITH_CARS, {
+    variables: { personId: id },
   });
+  console.log(loading, error, data);
 
   if (loading) return "Loading...";
-  if (error) return `Error! ${error.message}`;
-
-  const person = data.people.find((person) => person.id === id);
-
-  if (!person) {
+  if (error) {
     return (
       <div>
-        <p>Person not found.</p>
+        <p>Error! {error.message}</p>
         <Link to={`/`}>Go Back Home</Link>
       </div>
     );
   }
 
+  const person = data.personWithCars.person;
+  const cars = data.personWithCars.cars;
+
   return (
     <>
-      <PersonCard
-        id={person.id}
-        firstName={person.firstName}
-        lastName={person.lastName}
-      />
+      <Card title={`${person.firstName} ${person.lastName} `}>
+        {cars.map(({ id, year, make, model, price }) => (
+          <Card
+            key={id}
+            title={`${year} ${make} ${model}`}
+            extra={
+              <CurrencyFormat
+                value={price}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"$"}
+              />
+            }
+            type="inner"
+            style={{ marginTop: "1rem" }}
+          />
+        ))}
+      </Card>
+      <Divider />
+      <Link to={`/`}>Go Back Home</Link>
     </>
   );
 };
 
-export default PersonPage;
+export default ShowPage;

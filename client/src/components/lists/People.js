@@ -13,22 +13,22 @@ const People = () => {
   return (
     <>
       {data.people.length > 0 && (
+        <>
+          <Divider>Records</Divider>
           <List grid={{ gutter: 20, column: 1 }}>
             {data.people.map(({ id, firstName, lastName }) => (
-              <React.Fragment key={id}>
-                <Divider>Records</Divider>
-                <List.Item key={id}>
-                  <PersonCard
-                    key={id}
-                    id={id}
-                    firstName={firstName}
-                    lastName={lastName}
-                  />
-                </List.Item>
-              </React.Fragment>
+              <List.Item key={id}>
+                <PersonCard
+                  key={id}
+                  id={id}
+                  firstName={firstName}
+                  lastName={lastName}
+                />
+              </List.Item>
             ))}
           </List>
-        )}
+        </>
+      )}
     </>
   );
 };
